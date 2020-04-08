@@ -1,0 +1,111 @@
+<!--
+  @File Name          : emailMetricsViewerLWC.html
+  @Description        : 
+  @Author             : emmanuel.martinez@tengo.co
+  @Group              : 
+  @Last Modified By   : emmanuel.martinez@tengo.co
+  @Last Modified On   : 08/04/2020, 16:46:29
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    07/04/2020   emmanuel.martinez@tengo.co     Initial Version
+-->
+<template>
+    
+    <div class="container slds-theme_default">
+        <br>
+        <br>
+        <div class="slds-box slds-m-horizontal_xx-large">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_12-of-12">
+                    
+                    <div class="slds-text-heading_small"><b>Account Selector</b></div>
+                    <span>Select an account from the list to see related email metrics:</span>
+                    <lightning-combobox
+                        name="account-selector"
+                        value={value}
+                        placeholder="Select an Account"
+                        options={accountComboboxOptions}
+                        onchange={getEmailMetricsForAccount} >
+                    </lightning-combobox>
+                    
+                </div>
+            </div>
+            <br>
+        </div>
+        
+        <br>
+        
+        <div class="slds-m-horizontal_xx-large">
+            <div class="slds-grid slds-gutters">
+                
+                <div class="slds-col slds-size_4-of-12 metric-container">
+                    <div class="slds-text-align_center">Total Emails Sent</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{totalEmailsSent}</div>
+                </div>
+                
+                <div class="slds-col slds-size_4-of-12 metric-container">
+                    <div class="slds-text-align_center">Total Opens</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{totalOpens}</div>
+                </div>
+                
+                <div class="slds-col slds-size_4-of-12 metric-container">
+                    <div class="slds-text-align_center">Total Open Rate</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{openRate}%</div>
+                </div>
+                
+            </div>
+            
+            <br>
+            <br>
+            <br>
+            
+            <div class="slds-grid slds-gutters">
+
+                <div class="slds-col slds-size_1-of-12">
+                </div>
+
+                <div class="slds-col slds-size_2-of-12 metric-container">
+                    <div class="slds-text-align_center">Total Bounces</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{totalBounces}</div>
+                </div>
+
+                <div class="slds-col slds-size_2-of-12 metric-container">
+                    <div class="slds-text-align_center">Bounce Rate</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{bounceRate}%</div>
+                </div>
+                
+                <div class="slds-col slds-size_2-of-12 metric-container">
+                    <div class="slds-text-align_center">Total Campaign Members</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{totalCampaignMembers}</div>
+                </div>
+                
+                <div class="slds-col slds-size_2-of-12 metric-container">
+                    <div class="slds-text-align_center">Total Unsubscribes</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{totalUnsubscribes}</div>
+                </div>
+                
+                <div class="slds-col slds-size_2-of-12 metric-container">
+                    <div class="slds-text-align_center">Unsubscribe Rate</div>
+                    <br>
+                    <div class="slds-text-align_center metric-number slds-border_bottom" onclick={redirectToReport}>{unsubscribeRate}%</div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-12">
+                </div>
+                
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+</template>
