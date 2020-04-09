@@ -18,13 +18,17 @@ export default class EmailMetricsViewerLWC extends LightningElement {
     @track totalUnsubscribes = 0;
     @track unsubscribeRate = 0;
     @track selectedAccountId = undefined;
+    @track displaySpinner = false;
+    @track accountName;
     
-
     get accountComboboxOptions() {
         return this.accountList;
     }
 
     connectedCallback() {
+
+        this.displaySpinner = true;
+        
         getInitialAccountList()
             .then((data) => {
 
@@ -32,10 +36,13 @@ export default class EmailMetricsViewerLWC extends LightningElement {
                     let comboValues = this.convertToComboboxValues(data); 
                     this.accountList = comboValues;
                 }
+                
+                this.displaySpinner = false;
 
             })
             .catch(error => {
 
+                this.displaySpinner = false;
                 console.log('>>> Error in getInitialAccountList()');
                 console.log(JSON.parse(JSON.stringify(error)));
                 this.showToastMessage('There has been an error. Please reload this page and try again', 'error');
@@ -45,7 +52,9 @@ export default class EmailMetricsViewerLWC extends LightningElement {
 
     getEmailMetricsForAccount(event) {
 
+        this.displaySpinner = true;
         this.selectedAccountId = event.detail.value;
+        this.accountName = event.detail.label;
 
         queryAccountEmailMetrics({accountId : this.selectedAccountId})
             .then((data) => {
@@ -73,11 +82,14 @@ export default class EmailMetricsViewerLWC extends LightningElement {
                     }else{
                         this.unsubscribeRate = 0;
                     }
+
+                    this.displaySpinner = false;
                 }
 
             })
             .catch(error => {
 
+                this.displaySpinner = false;
                 console.log('>>> Error in getEmailMetricsForAccount()');
                 console.log(JSON.parse(JSON.stringify(error)));
                 this.showToastMessage('There has been an error. Please reload this page and try again', 'error');
@@ -124,22 +136,10 @@ export default class EmailMetricsViewerLWC extends LightningElement {
 
         }
         
-        
-        /*let baseUrl = 'https://amg--emdev.lightning.force.com/lightning/r/Report/00O29000000a7iAEAQ/view?fv0=';
-        let finalUrl = baseUrl + this.selectedAccountId;
-
-        let tempLink = document.createElement('a');
-        tempLink.style.display = 'none';
-        document.body.appendChild(tempLink);
-        tempLink.setAttribute('href', finalUrl);
-        a.setAttribute('target', '_blank');
-        tempLink.click();*/
-
     }
 
     showToastMessage(paramMessage, paramVariant){
         
-        //Variant could be: success, warning, error
         this.dispatchEvent(
             new ShowToastEvent({
                 title: paramVariant,

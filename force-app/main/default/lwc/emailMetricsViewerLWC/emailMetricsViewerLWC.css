@@ -7,6 +7,11 @@
     cursor: pointer;
 }
 
-/*.metric-container:hover{
-   
-}*/
+.metric-container:hover{
+    color: #342ead;
+    border-bottom: 2px solid #342ead;
+}
+
+.metric-container:hover:div{
+    font-weight: bold;
+}
