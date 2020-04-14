@@ -1,0 +1,55 @@
+<!--
+  @File Name          : DowngradeAuraTest2.cmp
+  @Description        : 
+  @Author             : emmanuel.martinez@tengo.co
+  @Group              : 
+  @Last Modified By   : emmanuel.martinez@tengo.co
+  @Last Modified On   : 14/4/2020, 4:27:17 p. m.
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    14/4/2020   emmanuel.martinez@tengo.co     Initial Version
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <!-- Import Javascript -->
+    <ltng:require scripts="{!$Resource.jqueryemdevzip +'/jquery.min.js'}" afterScriptsLoaded="{!c.setupJQuery}" />
+    
+    <!-- Aura handlers-->   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!--Aura attributes-->
+    <aura:attribute name="registeredEvents" type="List" />
+    
+    <center><h2><b>This is an Aura Component test</b></h2></center>
+    <br/>
+    <div class="access-test-class">
+        This is a test using a class name
+    </div>   
+    <br/>
+    <div id="access-test-id">
+        This is a test using an id
+    </div>
+    <br/>
+    <p>This is a test using an input</p>
+    <input id="testInput" type="text"/>
+    <br/>
+    <br/>
+    <button onclick="{!c.refreshConsole}">Refresh information in log console</button>
+
+    <br/>
+    <br/>
+    <p>Sibling test</p>
+    <div class="parent">
+        <div id="child-1">Child 1</div>
+        <div id="child-2">Child 2</div>
+    </div>
+    
+    <br/>
+    <br/>
+    
+    <h2><b>List of registered events</b></h2>
+    <aura:iteration items="{!v.registeredEvents}" var="event">
+        {!event}
+    </aura:iteration>
+    
+</aura:component>
